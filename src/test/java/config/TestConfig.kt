@@ -13,7 +13,7 @@ import java.net.URL
  * please be careful when moving any line of code here as these lines will be rewritten in bitrise
  */
 object TestConfig {
-   private val platformType = PlatformType.Android
+   private val platformType = PlatformType.iOS
 
    private val url = URL("http://127.0.0.1:4723/wd/hub")
 
@@ -30,7 +30,7 @@ object TestConfig {
       capabilities.run {
          setCapability(MobileCapabilityType.DEVICE_NAME, "pixel")
          setCapability(MobileCapabilityType.PLATFORM_NAME, "Android")
-         setCapability(MobileCapabilityType.PLATFORM_VERSION, "11")
+         setCapability(MobileCapabilityType.PLATFORM_VERSION, "10")
          setCapability(MobileCapabilityType.APP, System.getenv("BITRISE_APK_PATH"))
          //setCapability(MobileCapabilityType.APP, "/Users/choir/Downloads/release/app-release.apk")
          setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2")
