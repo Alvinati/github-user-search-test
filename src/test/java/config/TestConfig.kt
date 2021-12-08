@@ -28,7 +28,7 @@ object TestConfig {
    private fun getAndroidTestDriver() : AppiumDriver<out MobileElement>  {
       val capabilities =  DesiredCapabilities()
       capabilities.run {
-         setCapability(MobileCapabilityType.DEVICE_NAME, "pixel")
+         setCapability(MobileCapabilityType.DEVICE_NAME, "Android Emulator")
          setCapability(MobileCapabilityType.PLATFORM_NAME, "Android")
          setCapability(MobileCapabilityType.PLATFORM_VERSION, "10")
          setCapability(MobileCapabilityType.APP, System.getenv("BITRISE_APK_PATH"))
