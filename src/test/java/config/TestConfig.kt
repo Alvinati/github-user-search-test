@@ -18,11 +18,11 @@ object TestConfig {
     * 20,21
     */
    private val platformType = PlatformType.Android
-   private val appLocation = "/Users/choir/Downloads/gitsearch.apk"
+   private val appLocation = "/Users/choir/Documents/AndroidProjects/Private/app/build/outputs/apk/debug/app-debug.apk"
 
    private val url = URL("http://127.0.0.1:4723/wd/hub")
 
-   const val SCREEN_WAIT_TIMEOUT = 180L
+   const val SCREEN_WAIT_TIMEOUT = 30L
 
    fun getAppTestDriver(): AppiumDriver<out MobileElement> {
       return if(platformType == PlatformType.Android){
