@@ -1,21 +1,20 @@
 package features
 
 import base.BaseUITest
-import io.appium.java_client.MobileBy
-import org.openqa.selenium.support.ui.ExpectedConditions
+import config.TestConfig
 import org.testng.annotations.Test
-import page.SearchPage
 import util.Helper
 
-class SearchResultTest : BaseUITest() {
+class SearchResultTest : BaseUITest(TestConfig.getAppTestDriver()) {
 
+    private val testSSPath = "search-result-test/"
 
     @Test
     fun test_result_1(){
         searchPage.waitToDisplay()
         searchPage.inputSearch("alvi")
         Helper.assertLog("first search result", searchPage.getItemText(0), "alvin2ye")
-        takeScreenShot("test_result_1")
+        takeScreenShot(testSSPath,"test_result_1")
     }
 
     @Test
@@ -23,6 +22,6 @@ class SearchResultTest : BaseUITest() {
         searchPage.waitToDisplay()
         searchPage.inputSearch("alvinati")
         Helper.assertLog("first search result", searchPage.getItemText(0), "alvinatin")
-        takeScreenShot("test_result_2")
+        takeScreenShot(testSSPath, "test_result_2")
     }
 }

@@ -1,20 +1,13 @@
 package features
 
 import base.BaseUITest
-import io.appium.java_client.MobileBy
-import io.appium.java_client.touch.WaitOptions
-import io.appium.java_client.touch.offset.PointOption
-import model.Direction
-import org.openqa.selenium.Dimension
-import org.openqa.selenium.Point
-import org.openqa.selenium.support.ui.ExpectedConditions
-import org.testng.Assert
+import config.TestConfig
 import org.testng.annotations.Test
-import page.SearchPage
-import util.Helper
 
-class SearchUITest : BaseUITest() {
+class SearchUITest : BaseUITest(TestConfig.getAppTestDriver()) {
 
+
+    private val testSSPath = "search-ui-test/"
 
     private val searchKey = "alvinati"
     private val hint = "Search for name.."
@@ -24,7 +17,7 @@ class SearchUITest : BaseUITest() {
     fun before_search_display() {
         searchPage.waitToDisplay()
         searchPage.assertInput(hint)
-        takeScreenShot("before_search_display")
+        takeScreenShot(testSSPath, "before_search_display")
     }
 
     @Test
@@ -32,6 +25,6 @@ class SearchUITest : BaseUITest() {
         searchPage.waitToDisplay()
         searchPage.inputSearch(searchKey)
         searchPage.assertInput(searchKey)
-        takeScreenShot("input_search_display")
+        takeScreenShot(testSSPath, "input_search_display")
     }
 }
