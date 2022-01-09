@@ -2,9 +2,11 @@ package features
 
 import base.BaseUITest
 import config.TestConfig
+import io.appium.java_client.AppiumDriver
+import io.appium.java_client.MobileElement
 import org.testng.annotations.Test
 
-class SearchUITest : BaseUITest(TestConfig.getAppTestDriver()) {
+class SearchUITest : BaseUITest() {
 
 
     private val testSSPath = "search-ui-test/"
@@ -12,6 +14,9 @@ class SearchUITest : BaseUITest(TestConfig.getAppTestDriver()) {
     private val searchKey = "alvinati"
     private val hint = "Search for name.."
 
+    override fun getDriver(): AppiumDriver<out MobileElement> {
+        return TestConfig.getAppTestDriver()
+    }
 
     @Test
     fun before_search_display() {

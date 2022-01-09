@@ -2,12 +2,19 @@ package features
 
 import base.BaseUITest
 import config.TestConfig
+import io.appium.java_client.AppiumDriver
+import io.appium.java_client.MobileElement
 import org.testng.annotations.Test
 import util.Helper
 
-class SearchResultTest : BaseUITest(TestConfig.getAppTestDriver()) {
+class SearchResultTest : BaseUITest() {
 
     private val testSSPath = "search-result-test/"
+
+
+    override fun getDriver(): AppiumDriver<out MobileElement> {
+        return TestConfig.getAppTestDriver()
+    }
 
     @Test
     fun test_result_1(){
@@ -24,4 +31,5 @@ class SearchResultTest : BaseUITest(TestConfig.getAppTestDriver()) {
         Helper.assertLog("first search result", searchPage.getItemText(0), "alvinatin")
         takeScreenShot(testSSPath, "test_result_2")
     }
+
 }

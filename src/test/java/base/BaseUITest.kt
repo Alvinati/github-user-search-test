@@ -13,28 +13,31 @@ import java.io.IOException
 import java.util.concurrent.TimeUnit
 
 
-open class BaseUITest(private val driver: AppiumDriver<out MobileElement>) {
+abstract class BaseUITest {
 
+    protected lateinit var testDriver: AppiumDriver<out MobileElement>
     protected lateinit var uiWait : WebDriverWait
     protected lateinit var searchPage: SearchPage
     private val screenShotPath = "./ss/"
 
+    abstract fun getDriver() : AppiumDriver<out MobileElement>
+
     @BeforeClass
     fun prepare() {
-        uiWait = WebDriverWait(driver, TestConfig.SCREEN_WAIT_TIMEOUT)
-        driver.manage()?.timeouts()?.implicitlyWait(90000, TimeUnit.MILLISECONDS)
-        searchPage = SearchPage(driver)
-
+        testDriver = getDriver()
+        uiWait = WebDriverWait(testDriver, TestConfig.SCREEN_WAIT_TIMEOUT)
+        testDriver.manage()?.timeouts()?.implicitlyWait(90000, TimeUnit.MILLISECONDS)
+        searchPage = SearchPage(testDriver)
     }
 
     @AfterClass
     fun tearDown() {
-        driver.quit()
+        testDriver.quit()
     }
 
     @Throws(IOException::class)
     fun takeScreenShot(path:String, fileName: String) {
-        val srcFile: File = driver.getScreenshotAs(OutputType.FILE)
+        val srcFile: File = testDriver.getScreenshotAs(OutputType.FILE)
         val targetFile = File("$screenShotPath$path$fileName.jpg")
         FileUtils.copyFile(srcFile, targetFile)
     }
