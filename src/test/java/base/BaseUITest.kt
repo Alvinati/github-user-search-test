@@ -6,6 +6,7 @@ import io.appium.java_client.MobileElement
 import org.apache.commons.io.FileUtils
 import org.openqa.selenium.OutputType
 import org.openqa.selenium.support.ui.WebDriverWait
+import org.testng.Reporter
 import org.testng.annotations.*
 import page.SearchPage
 import java.io.File
@@ -35,10 +36,13 @@ abstract class BaseUITest {
         testDriver.quit()
     }
 
-    @Throws(IOException::class)
     fun takeScreenShot(path:String, fileName: String) {
-        val srcFile: File = testDriver.getScreenshotAs(OutputType.FILE)
-        val targetFile = File("$screenShotPath$path$fileName.jpg")
-        FileUtils.copyFile(srcFile, targetFile)
+        try{
+            val srcFile: File = testDriver.getScreenshotAs(OutputType.FILE)
+            val targetFile = File("$screenShotPath$path$fileName.jpg")
+            FileUtils.copyFile(srcFile, targetFile)
+        }catch (ex: IOException){
+            Reporter.log("ERROR: Screen Shot Failed! \n\n ${ex.message}")
+        }
     }
 }

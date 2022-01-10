@@ -1,9 +1,11 @@
 package features
 
 import base.BaseUITest
+import config.DeviceType
 import config.TestConfig
 import io.appium.java_client.AppiumDriver
 import io.appium.java_client.MobileElement
+import io.appium.java_client.android.AndroidDriver
 import org.testng.annotations.Test
 import util.Helper
 
@@ -13,7 +15,8 @@ class SearchResultTest : BaseUITest() {
 
 
     override fun getDriver(): AppiumDriver<out MobileElement> {
-        return TestConfig.getAppTestDriver()
+        val caps = TestConfig.androidCapabilities(DeviceType.Device1)
+        return AndroidDriver(TestConfig.url, caps)
     }
 
     @Test
