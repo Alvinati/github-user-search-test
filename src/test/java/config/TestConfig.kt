@@ -45,6 +45,7 @@ object TestConfig {
          setCapability(MobileCapabilityType.APP, appLocation)
          setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2")
          setCapability(MobileCapabilityType.NO_RESET, true)
+         setCapability("appium:appWaitForLaunch", false)
          setCapability(AndroidMobileCapabilityType.ANDROID_INSTALL_TIMEOUT, 600000)
          setCapability(AndroidMobileCapabilityType.ADB_EXEC_TIMEOUT, 600000)
       }
