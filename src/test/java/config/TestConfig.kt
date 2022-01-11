@@ -16,14 +16,14 @@ object TestConfig {
     * WARNING!!
     * please be careful when moving these lines of code here, as these lines will be rewritten in bitrise
     * current lines modified in bitrise:
-    * 20,21
+    * 21,22
     */
    private val platformType = PlatformType.Android
    private val appLocation = "/Users/choir/Documents/AndroidProjects/Private/app/build/outputs/apk/debug/app-debug.apk"
 
    val url = URL("http://127.0.0.1:4723/wd/hub")
 
-   const val SCREEN_WAIT_TIMEOUT = 60L
+   const val SCREEN_WAIT_TIMEOUT = 240L
 
    fun getAppTestDriver(deviceType: DeviceType): AppiumDriver<out MobileElement> {
       return if(platformType == PlatformType.Android){
