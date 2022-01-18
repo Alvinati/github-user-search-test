@@ -4,7 +4,7 @@
     <test name="deviceTest2">
         <classes>
             <class name="features.SearchUITest"/>
-            <class name="features.SearchUITest"/>
+            <class name="features.SearchResultTest"/>
         </classes>
     </test>
 </suite>

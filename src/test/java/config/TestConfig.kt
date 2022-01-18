@@ -19,7 +19,7 @@ object TestConfig {
     * 21,22
     */
    private val platformType = PlatformType.Android
-   private val appLocation = "/Users/choir/Documents/AndroidProjects/Private/app/build/outputs/apk/debug/app-debug.apk"
+   private val appLocation = "/Users/choirunisatrialvinati/StudioProjects/gitsearch/app/build/outputs/apk/debug/app-debug.apk"
 
    val url = URL("http://127.0.0.1:4723/wd/hub")
 
