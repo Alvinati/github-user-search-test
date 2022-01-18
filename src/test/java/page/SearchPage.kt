@@ -1,5 +1,6 @@
 package page
 
+import config.TestConfig
 import io.appium.java_client.AppiumDriver
 import io.appium.java_client.MobileBy
 import io.appium.java_client.MobileElement
@@ -54,7 +55,7 @@ class SearchPage(private val driver: AppiumDriver<out MobileElement>) {
     @AndroidFindBy(accessibility = ACC_ID_TITLE_VIEW)
     private lateinit var elementTitle : WebElement
 
-    private val wait = WebDriverWait(driver, 15L)
+    private val wait = WebDriverWait(driver, TestConfig.SCREEN_WAIT_TIMEOUT)
 
     fun waitToDisplay() {
         wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(MobileBy.AccessibilityId(ACC_ID_TITLE_VIEW)))
