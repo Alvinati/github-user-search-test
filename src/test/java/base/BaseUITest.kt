@@ -3,6 +3,7 @@ package base
 import config.TestConfig
 import io.appium.java_client.AppiumDriver
 import io.appium.java_client.MobileElement
+import model.WaitElement
 import org.apache.commons.io.FileUtils
 import org.openqa.selenium.OutputType
 import org.openqa.selenium.support.ui.WebDriverWait
@@ -17,7 +18,7 @@ import java.util.concurrent.TimeUnit
 abstract class BaseUITest {
 
     protected lateinit var testDriver: AppiumDriver<out MobileElement>
-    protected lateinit var uiWait : WebDriverWait
+    protected lateinit var uiWait : WaitElement
     protected lateinit var searchPage: SearchPage
     private val screenShotPath = "./ss/"
 
@@ -26,9 +27,9 @@ abstract class BaseUITest {
     @BeforeClass
     fun prepare() {
         testDriver = getDriver()
-        uiWait = WebDriverWait(testDriver, TestConfig.SCREEN_WAIT_TIMEOUT)
+        uiWait = WaitElement(testDriver)
         testDriver.manage()?.timeouts()?.implicitlyWait(90000, TimeUnit.MILLISECONDS)
-        searchPage = SearchPage(testDriver)
+        searchPage = SearchPage(testDriver, uiWait)
     }
 
     @AfterClass

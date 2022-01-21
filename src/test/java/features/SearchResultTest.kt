@@ -8,6 +8,7 @@ import io.appium.java_client.MobileElement
 import io.appium.java_client.android.AndroidDriver
 import org.testng.annotations.Test
 import util.Helper
+import kotlin.test.currentStackTrace
 
 class SearchResultTest : BaseUITest() {
 

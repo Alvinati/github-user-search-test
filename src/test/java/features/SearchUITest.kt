@@ -17,7 +17,7 @@ class SearchUITest : BaseUITest() {
     private val hint = "Search for name.."
 
     override fun getDriver(): AppiumDriver<out MobileElement> {
-        val caps = TestConfig.androidCapabilities(DeviceType.Device1)
+        val caps = TestConfig.androidCapabilities(DeviceType.Device2)
         return AndroidDriver(TestConfig.url, caps)
     }
 

@@ -1,7 +1,8 @@
 package config
 
 data class TestDeviceInfo(
-    val udiid: String,
+    var deviceName: String? = null,
+    var udiid: String? = null,
     val systemPort : Int,
     val platformVersion : String
 )

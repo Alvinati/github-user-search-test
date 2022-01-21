@@ -28,7 +28,7 @@ object TestConfig {
    fun getAppTestDriver(deviceType: DeviceType): AppiumDriver<out MobileElement> {
       return if(platformType == PlatformType.Android){
          val testInfo = getDeviceInfo(platformType, deviceType)
-         getAndroidTestDriver(testInfo.udiid, testInfo.systemPort, testInfo.platformVersion)
+         getAndroidTestDriver(testInfo.systemPort, testInfo.platformVersion)
       }else getIOSTestDriver()
    }
 
@@ -39,8 +39,8 @@ object TestConfig {
       println("${testInfo.systemPort}")
       capabilities.apply {
         // setCapability(MobileCapabilityType.UDID, null)
-         //  setCapability(MobileCapabilityType.DEVICE_NAME, udid)
-         setCapability(MobileCapabilityType.PLATFORM_NAME, "Android")
+        //  setCapability(MobileCapabilityType.DEVICE_NAME, testInfo.deviceName)
+          setCapability(MobileCapabilityType.PLATFORM_NAME, "Android")
          setCapability(MobileCapabilityType.PLATFORM_VERSION, testInfo.platformVersion)
          setCapability(MobileCapabilityType.APP, appLocation)
          setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2")
@@ -52,11 +52,9 @@ object TestConfig {
       return capabilities
    }
 
-   private fun getAndroidTestDriver(udid: String, systemPort: Int, platformVersion: String) : AppiumDriver<out MobileElement>  {
+   private fun getAndroidTestDriver(systemPort: Int, platformVersion: String) : AppiumDriver<out MobileElement>  {
       val capabilities =  DesiredCapabilities()
       capabilities.run {
-          setCapability(MobileCapabilityType.UDID, udid)
-       //  setCapability(MobileCapabilityType.DEVICE_NAME, udid)
          setCapability(MobileCapabilityType.PLATFORM_NAME, "Android")
          setCapability(MobileCapabilityType.PLATFORM_VERSION, platformVersion)
          setCapability(MobileCapabilityType.APP, appLocation)
@@ -88,15 +86,15 @@ object TestConfig {
         PlatformType.Android -> {
            when(deviceType){
               DeviceType.Device1 -> {
-                 TestDeviceInfo("emulator-5554", 8201, "10")
+                 TestDeviceInfo(udiid = "localhost:4321", systemPort = 8201, platformVersion = "10")
               }
               DeviceType.Device2 -> {
-                 TestDeviceInfo("emulator-5556", 8203, "9")
+                 TestDeviceInfo(udiid = "localhost:4322", systemPort = 8202, platformVersion = "9")
               }
            }
          }
         PlatformType.iOS -> {
-            TestDeviceInfo("", 8100, "14.5")
+            TestDeviceInfo(systemPort = 8100, platformVersion = "14.5")
          }
       }
    }

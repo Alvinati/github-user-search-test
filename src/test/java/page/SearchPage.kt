@@ -9,20 +9,19 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator
 import io.appium.java_client.touch.WaitOptions
 import io.appium.java_client.touch.offset.PointOption
 import model.Direction
+import model.WaitElement
 import org.openqa.selenium.Dimension
 import org.openqa.selenium.Point
 import org.openqa.selenium.WebElement
 import org.openqa.selenium.support.PageFactory
 import org.openqa.selenium.support.ui.ExpectedConditions
-import org.openqa.selenium.support.ui.WebDriverWait
-import org.testng.Assert
 import util.Helper
 import util.PlatformTouchAction
 import util.getCoordinate
 import java.time.Duration
 import kotlin.test.fail
 
-class SearchPage(private val driver: AppiumDriver<out MobileElement>) {
+class SearchPage(private val driver: AppiumDriver<out MobileElement>, private val wait: WaitElement) {
 
     companion object {
         const val ACC_ID_TITLE_VIEW = "main.label_title"
@@ -34,7 +33,8 @@ class SearchPage(private val driver: AppiumDriver<out MobileElement>) {
     }
 
     init {
-        PageFactory.initElements(AppiumFieldDecorator(driver), this)
+        PageFactory.initElements(AppiumFieldDecorator(driver, Duration.ofSeconds(TestConfig.SCREEN_WAIT_TIMEOUT))
+            , this)
     }
 
     @AndroidFindBy(accessibility = ACC_ID_ITEM_VIEW)
@@ -55,10 +55,8 @@ class SearchPage(private val driver: AppiumDriver<out MobileElement>) {
     @AndroidFindBy(accessibility = ACC_ID_TITLE_VIEW)
     private lateinit var elementTitle : WebElement
 
-    private val wait = WebDriverWait(driver, TestConfig.SCREEN_WAIT_TIMEOUT)
-
     fun waitToDisplay() {
-        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(MobileBy.AccessibilityId(ACC_ID_TITLE_VIEW)))
+        wait.longWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(MobileBy.AccessibilityId(ACC_ID_TITLE_VIEW)))
     }
 
     fun assertInput(text: String){
@@ -66,13 +64,13 @@ class SearchPage(private val driver: AppiumDriver<out MobileElement>) {
     }
 
     fun inputSearch(searchKey: String) {
-        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(ACC_ID_SEARCH_VIEW)))
+        wait.minimalWait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(ACC_ID_SEARCH_VIEW)))
         elementFieldSearch.clear()
         elementFieldSearch.sendKeys(searchKey)
     }
 
     fun scrollItemToTop(indexItem: Int) {
-        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(MobileBy.AccessibilityId(ACC_ID_ITEM_VIEW)))
+        wait.minimalWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(MobileBy.AccessibilityId(ACC_ID_ITEM_VIEW)))
         val lineSeparators = driver.findElementsByAccessibilityId(ACC_ID_ITEM_LINE_SEPARATOR)
         val itemCount = lineSeparators.size
         val endCoordinate = elementTitle.getCoordinate()
@@ -88,7 +86,7 @@ class SearchPage(private val driver: AppiumDriver<out MobileElement>) {
     }
 
     fun getItemText(indexItem: Int) : String {
-        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(MobileBy.AccessibilityId(ACC_ID_ITEM_NAME)))
+        wait.defaultWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(MobileBy.AccessibilityId(ACC_ID_ITEM_NAME)))
         val itemNames = driver.findElementsByAccessibilityId(ACC_ID_ITEM_NAME)
         return itemNames[indexItem].text
     }
