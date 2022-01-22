@@ -1,8 +1,8 @@
 package features
 
 import base.BaseUITest
-import config.DeviceType
 import config.TestConfig
+import data.Device
 import io.appium.java_client.AppiumDriver
 import io.appium.java_client.MobileElement
 import io.appium.java_client.android.AndroidDriver
@@ -17,7 +17,7 @@ class SearchUITest : BaseUITest() {
     private val hint = "Search for name.."
 
     override fun getDriver(): AppiumDriver<out MobileElement> {
-        val caps = TestConfig.androidCapabilities(DeviceType.Device2)
+        val caps = TestConfig.androidCapabilities(Device.GooglePixel2aXL)
         return AndroidDriver(TestConfig.url, caps)
     }
 
