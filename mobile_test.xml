@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Suite" thread-count="2" parallel="tests">
+<suite name="Suite" parallel="tests">
     <test name="deviceTest1">
         <classes>
-            <class name="features.SearchResultTest"/>
-        </classes>
-    </test>
-    <test name="deviceTest2">
-        <classes>
             <class name="features.SearchUITest"/>
+            <class name="features.SearchResultTest"/>
         </classes>
     </test>
 </suite>

@@ -4,7 +4,7 @@ class DeviceInfo {
 
    fun getDeviceInfo(device: Device) : TestDeviceInfo {
       return when(device) {
-           Device.GooglePixel5 -> {
+           Device.GooglePixel3a -> {
                TestDeviceInfo(udiid = "localhost:4321", systemPort = 8201, platformVersion = "10")
            }
           Device.GooglePixel2aXL -> {
@@ -19,7 +19,7 @@ class DeviceInfo {
 }
 
 enum class Device {
-    GooglePixel5,
+    GooglePixel3a,
     GooglePixel2aXL,
     IPhone11
 }

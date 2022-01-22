@@ -15,7 +15,7 @@ class SearchResultTest : BaseUITest() {
 
 
     override fun getDriver(): AppiumDriver<out MobileElement> {
-        val caps = TestConfig.androidCapabilities(Device.GooglePixel5)
+        val caps = TestConfig.androidCapabilities(Device.GooglePixel3a)
         return AndroidDriver(TestConfig.url, caps)
     }
 
